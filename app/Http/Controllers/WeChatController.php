@@ -32,6 +32,15 @@ class WeChatController extends Controller
             $openid = $message['FromUserName'];
             switch ($message['MsgType']) {
                 case 'event':
+                    if ($message['Event']=='subscribe') {
+                        return '收到关注事件消息';
+                    }else if($message['Event']=='unsubscribe'){
+                        return '收到取关事件消息';
+                    }else if($message['Event']=='SCAN'){
+                        return '收到扫码事件消息';
+                    }else if($message['Event']=='CLICK'){
+                        return '收到点击事件消息';
+                    }
                     return '收到事件消息';
                     break;
                 case 'text':
