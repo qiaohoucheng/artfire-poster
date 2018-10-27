@@ -34,11 +34,11 @@ class WeChatController extends Controller
             switch ($message['MsgType']) {
                 case 'event':
                     if ($message['Event']=='subscribe') {
-                        $result = $app->qrcode->forever(56);
+                        $result = $app->qrcode->forever('foo');
                         if($result){
                             return $result['url'];
-                            $content = file_get_contents($result['url']);
-                            $a = file_put_contents(public_path().'/code.jpg', $content);
+//                            $content = file_get_contents($result['url']);
+//                            $a = file_put_contents(public_path().'/code.jpg', $content);
 //                            if($a){
 //                                $m = $app->media->uploadImage(public_path().'/code.jpg');
 //                                return new Image($m['media_id']);
