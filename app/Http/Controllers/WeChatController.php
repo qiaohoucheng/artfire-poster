@@ -28,11 +28,15 @@ class WeChatController extends Controller
     {
         $app = app('wechat.official_account');
 
-        $app->server->push(function ($message) {
+        $app->server->push(function ($message) use($app) {
             $openid = $message['FromUserName'];
             switch ($message['MsgType']) {
                 case 'event':
                     if ($message['Event']=='subscribe') {
+                        $result = $app->qrcode->temporary('foo', 6 * 24 * 3600);
+                        if($result){
+                            return json_encode($result);
+                        }
                         return '收到关注事件消息';
                     }else if($message['Event']=='unsubscribe'){
                         return '收到取关事件消息';
