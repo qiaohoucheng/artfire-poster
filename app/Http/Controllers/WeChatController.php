@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Log;
-use EasyWeChat\Factory;
 use EasyWeChat\Kernel\Messages\Image;
+use Intervention\Image\ImageManager;
 
 class WeChatController extends Controller
 {
@@ -45,8 +45,7 @@ class WeChatController extends Controller
                             }
 
                         }
-
-                        return '收到关注事件消息';
+                        //return '收到关注事件消息';
                     }else if($message['Event']=='unsubscribe'){
                         return '收到取关事件消息';
                     }else if($message['Event']=='SCAN'){
@@ -57,17 +56,8 @@ class WeChatController extends Controller
                     return '收到事件消息';
                     break;
                 case 'text':
-                    $result = $app->qrcode->forever('foo');
-                    if($result){
-                        $url = $app->qrcode->url($result['ticket']);
-                        $content = file_get_contents($url);
-                        $a = file_put_contents(public_path().'/code.jpg', $content);
-                        if($a){
-                            $m = $app->media->uploadImage(public_path().'/code.jpg');
-                            return new Image($m['media_id']);
-                        }
-
-                    }
+                    $manager = new ImageManager(array('driver' => 'imagick'));
+                    $image = $manager->make('public/foo.jpg')->resize(300, 200);
                     return '收到'.$openid.'文字消息';
                     break;
                 case 'image':
