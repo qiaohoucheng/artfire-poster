@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Log;
 use EasyWeChat\Factory;
+use EasyWeChat\Kernel\Messages\Image;
 
 class WeChatController extends Controller
 {
@@ -35,8 +36,6 @@ class WeChatController extends Controller
                     if ($message['Event']=='subscribe') {
                         $result = $app->qrcode->forever(56);
                         if($result){
-                            //$result['ticket'];
-                            //$result[''];
                             $content = file_get_contents($result['url']);
                             $a = file_put_contents(public_path().'/code.jpg', $content);
                             if($a){
