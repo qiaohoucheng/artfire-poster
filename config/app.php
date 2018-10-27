@@ -159,7 +159,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        //wechat
+        Overtrue\LaravelWeChat\ServiceProvider::class,
+        //image
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -208,7 +211,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //wechat
+        'EasyWeChat' => Overtrue\LaravelWeChat\Facade::class,
+        //images
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
