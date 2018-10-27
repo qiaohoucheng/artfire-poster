@@ -36,13 +36,13 @@ class WeChatController extends Controller
                     if ($message['Event']=='subscribe') {
                         $result = $app->qrcode->forever('foo');
                         if($result){
-                            return $result['url'];
-//                            $content = file_get_contents($result['url']);
-//                            $a = file_put_contents(public_path().'/code.jpg', $content);
-//                            if($a){
-//                                $m = $app->media->uploadImage(public_path().'/code.jpg');
-//                                return new Image($m['media_id']);
-//                            }
+                            $url = $app->qrcode->url($result['ticket']);
+                            $content = file_get_contents($url);
+                            $a = file_put_contents(public_path().'/code.jpg', $content);
+                            if($a){
+                                $m = $app->media->uploadImage(public_path().'/code.jpg');
+                                return new Image($m['media_id']);
+                            }
 
                         }
 
@@ -57,6 +57,17 @@ class WeChatController extends Controller
                     return '收到事件消息';
                     break;
                 case 'text':
+                    $result = $app->qrcode->forever('foo');
+                    if($result){
+                        $url = $app->qrcode->url($result['ticket']);
+                        $content = file_get_contents($url);
+                        $a = file_put_contents(public_path().'/code.jpg', $content);
+                        if($a){
+                            $m = $app->media->uploadImage(public_path().'/code.jpg');
+                            return new Image($m['media_id']);
+                        }
+
+                    }
                     return '收到'.$openid.'文字消息';
                     break;
                 case 'image':
