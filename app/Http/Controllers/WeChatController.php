@@ -29,12 +29,13 @@ class WeChatController extends Controller
         $app = app('wechat.official_account');
 
         $app->server->push(function ($message) {
+            $openid = message['FromUserName'];
             switch ($message['MsgType']) {
                 case 'event':
                     return '收到事件消息';
                     break;
                 case 'text':
-                    return '收到文字消息';
+                    return '收到'.$openid.'文字消息';
                     break;
                 case 'image':
                     return '收到图片消息';
