@@ -94,9 +94,43 @@ class WeChatController extends Controller
     public function create_menu()
     {
         $app = app('wechat.official_account');
-        $list = $app->menu->list();
-        $current = $app->menu->current();
-        var_dump($current);
-        var_dump($list);
+        // $list = $app->menu->list();
+        // $current = $app->menu->current();
+        $buttons = [
+            [
+                "type" => "view",
+                "name" => "三板头条",
+                "url"  => "http://www.dudong.com"
+            ],
+            [
+
+                "type" => "view",
+                "name" => "白皮书",
+                "url" => "http://poster.qiaohoucheng.com/74175740.pdf"
+
+            ],
+            [
+                "name"       => "加入我们",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "招聘编辑 | 实习生",
+                        "url"  => "http://mp.weixin.qq.com/s/4l8w7yKx9uBl2zJRG2m9Dg"
+                    ],
+                    [
+                        "type" => "click",
+                        "name" => "投稿",
+                        "key"  => "读懂新三板」招募特约研究员，欢迎赐稿，投稿邮箱：dudong@dudong.com。"
+                    ],
+                    [
+                        "type" => "click",
+                        "name" => "联系我们",
+                        "key" => "如有合作，请联系读懂君，微信号：ddxinsanban3"
+                    ],
+                ],
+            ],
+        ];
+        $app->menu->create($buttons);
+        exit;
     }
 }
