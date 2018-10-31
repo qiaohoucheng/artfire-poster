@@ -95,6 +95,8 @@ class WeChatController extends Controller
     {
         $app = app('wechat.official_account');
         $list = $app->menu->list();
+        $current = $app->menu->current();
+        var_dump($current);
         var_dump($list);
     }
 }
