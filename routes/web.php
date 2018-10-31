@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::any('/wechat', 'WeChatController@serve');
 
 Route::any('/img','ImagesController@index');
+Route::any('/createMenu','WeChatController@create_menu');
